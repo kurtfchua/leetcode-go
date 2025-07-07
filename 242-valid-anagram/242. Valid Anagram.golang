@@ -21,11 +21,6 @@ func isAnagram(s string, t string) bool {
         }
     }
     
-    for k, v := range s_dict{
-        if t_v, ok := t_dict[k]; !ok || t_v != v{
-            return false
-        }
-    }
-    
-    return true
+    return reflect.DeepEqual(s_dict, t_dict)
+
 }
