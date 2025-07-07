@@ -25,10 +25,11 @@ func groupAnagrams(strs []string) [][]string {
 }
 
 func serialize(counts []int) string{
-    res := ""
+    var sb strings.Builder
     
     for _, count := range counts{
-        res += "#" + strconv.Itoa(count)
+       sb.WriteString(strconv.Itoa(count))
+       sb.WriteString("#")
     }
-    return res
+    return sb.String()
 }
