@@ -1,0 +1,38 @@
+func validPath(n int, edges [][]int, source int, destination int) bool {
+    if source == destination {
+        return true
+    }
+    adjList := map[int][]int{}
+
+    for _, edge := range edges{
+        u, v := edge[0], edge[1]
+        adjList[u] = append(adjList[u], v)
+        adjList[v] = append(adjList[v], u)
+    }
+
+    return bfs(source, destination, adjList)
+}
+
+func bfs(source int, destination int, adjList map[int][]int) bool{
+    visited := make(map[int]bool)
+    queue := []int{source}
+
+    for len(queue) > 0{
+        node := queue[0]
+        queue = queue[1:]
+
+        for _, neighbor := range adjList[node]{
+            if neighbor == destination{
+                return true
+            }
+
+            if !visited[neighbor]{
+                queue = append(queue, neighbor)
+                visited[neighbor] = true
+            }
+        }
+    }
+
+    return false
+
+}
