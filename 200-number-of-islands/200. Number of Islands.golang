@@ -2,16 +2,28 @@ func numIslands(grid [][]byte) int {
     ROWS, COLS := len(grid), len(grid[0])
     count := 0
 
-    for r := range ROWS{
-        for c := range COLS{
+    for r := 0; r < ROWS; r ++{
+        for c := 0; c < COLS; c ++{
             if grid[r][c] == '1'{
-                bfs(grid, r,c)
+                //bfs(grid, r,c)
+                dfs(grid, ROWS, COLS, r,c)
                 count++
             }
         }
     }
 
     return count
+}
+
+func dfs(grid [][]byte, ROWS int, COLS int, r int, c int){
+    if 0 > r || r >= ROWS || 0 > c || c >= COLS || grid[r][c] == '0'{
+        return
+    } 
+    grid[r][c] = '0'
+    dfs(grid, ROWS, COLS, r,c+1)
+    dfs(grid, ROWS, COLS,r+1, c)
+    dfs(grid, ROWS, COLS,r-1,c)
+    dfs(grid, ROWS, COLS,r,c-1)
 }
 
 func bfs(grid [][]byte, r int, c int){
