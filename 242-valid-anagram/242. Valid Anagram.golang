@@ -1,31 +1,23 @@
 func isAnagram(s string, t string) bool {
-    if len(s) != len(t) {
-        return false
-    }
-
-    s_dict, t_dict := make(map[rune]int), make(map[rune]int)
+    counts := make([]int, 26)
 
     for _, c := range s{
-        if _, ok := s_dict[c]; ok {
-            s_dict[c] ++
-        }else{
-        s_dict[c] = 1
-        }
+        counts[c-'a']++
     }
 
     for _, c := range t{
-        if _, ok := t_dict[c]; ok {
-            t_dict[c] ++
-        }else{
-        t_dict[c] = 1
+        counts[c-'a']--
+        if counts[c-'a'] < 0{
+            return false
         }
     }
-    
-    for k, v := range s_dict{
-        if tv, ok := t_dict[k]; !ok || tv != v{
+
+    for _, count := range counts{
+        if count != 0{
             return false
         }
     }
 
     return true
+    
 }
