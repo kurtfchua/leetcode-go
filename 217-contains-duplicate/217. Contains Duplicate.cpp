@@ -1,13 +1,13 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        std::set<int> numSet;
+        std::set<int> set;
 
         for (int num : nums){
-            if (numSet.contains(num)){
+            if (set.contains(num)){
                 return true;
             }
-            numSet.insert(num);
+            set.insert(num);
         }
 
         return false;
